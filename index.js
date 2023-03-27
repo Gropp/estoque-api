@@ -11,8 +11,6 @@ const app = express();
 // importar as rotas
 const itemRoute = require('./src/routes/item.route');
 
-
-
 // instancia o bofy-parser
 app.use(bodyParser.urlencoded({extended: true}));
 // seta o padrao para json
@@ -20,10 +18,7 @@ app.use(bodyParser.json());
 // define as rotas
 app.use('/api/itens/', itemRoute);
 
-
-
-
-
+// liga o servidor
 app.listen(process.env.PORTA, () => {
     console.log('servidor rodando!')
 })
