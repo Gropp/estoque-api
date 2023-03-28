@@ -1,3 +1,4 @@
+// DEFINE AS ROTAS (NA URL) e chama os controllers
 const express = require('express');
 // funcao para roterizar a aplicacao - modula por verbo http
 const router = express.Router();

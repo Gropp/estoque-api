@@ -15,7 +15,7 @@ const itemRoute = require('./src/routes/item.route');
 app.use(bodyParser.urlencoded({extended: true}));
 // seta o padrao para json
 app.use(bodyParser.json());
-// define as rotas
+// define as rotas INICIAIS
 app.use('/api/itens/', itemRoute);
 
 // liga o servidor
