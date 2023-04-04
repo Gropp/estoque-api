@@ -8,15 +8,19 @@ const bodyParser = require('body-parser');
 const app = express();
 // configura a porta no arquivo .env com o uso da biblioteca dotenv
 // const porta = 3030
+
 // importar as rotas
+const usuarioRoute = require('./src/routes/usuario.route');
 const itemRoute = require('./src/routes/item.route');
 
 // instancia o bofy-parser
 app.use(bodyParser.urlencoded({extended: true}));
 // seta o padrao para json
 app.use(bodyParser.json());
-// define as rotas INICIAIS
+
+// define as chamadas de rotas 
 app.use('/api/itens/', itemRoute);
+app.use('/api/usuarios', usuarioRoute);
 
 // liga o servidor
 app.listen(process.env.PORTA, () => {
