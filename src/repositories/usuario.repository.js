@@ -6,7 +6,7 @@ const { Usuario } = require('../database/models/index');
 
 //funcao de create usuarios
 //funcoes de manipulacao do bd nao serao alteradas, entao criamos como constantes
-const create = async function(usuario) {
+const criar = async function(usuario) {
     const usuarioCriado = await Usuario.create(usuario);
     return usuarioCriado;
 }
@@ -14,5 +14,5 @@ const create = async function(usuario) {
 
 //exportando as funcoes
 module.exports = {
-    create: create,
+    criar: criar,
 }

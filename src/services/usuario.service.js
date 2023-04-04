@@ -3,11 +3,11 @@
 const usuarioRepository = require('../repositories/usuario.repository');
 
 //servico de criar usuarios
-const create = async function(usuario) {
-    const usuarioCriado = await usuarioRepository.create(usuario);
+const criar = async function(usuario) {
+    const usuarioCriado = await usuarioRepository.criar(usuario);
     return usuarioCriado;
 }
 
 module.exports = {
-    create:create,
+    criar:criar,
 }

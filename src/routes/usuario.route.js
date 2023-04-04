@@ -7,7 +7,7 @@ const usuarioController = require('../controllers/usuario.controller');
 
 //o segundo argumento do router.post é a funcao req, res, que esta armazenada dentro
 //é uma rota de entrada - post com a funcao create do modulo controller
-router.post('/', usuarioController.create)
+router.post('/', usuarioController.criar)
 
 //exportamos a rota
 module.exports = router;
