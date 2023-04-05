@@ -1,4 +1,4 @@
-//COMUNICACAO COM A TABELA usuarios DO BD
+//COMUNICACAO COM O BANCO DE DADOS
 //requisita o banco
 const db = require('../database/models/index');
 //requisita a tabela usuarios do banco
@@ -11,8 +11,22 @@ const criar = async function(usuario) {
     return usuarioCriado;
 }
 
+//funcao de select * sem parametros
+const encontrarTodos = async function() {
+    const usuarios = await Usuario.findAll();
+    return usuarios;
+}
+
+//select por id
+const encontrarPorId = async function(id) {
+    const usuario = await Usuario.findByPk(id);
+    return usuario;
+}
+
 
 //exportando as funcoes
 module.exports = {
     criar: criar,
+    encontrarTodos: encontrarTodos,
+    encontrarPorId: encontrarPorId
 }
