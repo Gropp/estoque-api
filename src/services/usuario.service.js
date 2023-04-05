@@ -1,9 +1,17 @@
 //os servicos sao as regras de negocio que utilizam as funcoes dos repositorios
 //fazemos as requisicoes dos repositorios - neste caso da table usuarios
 const usuarioRepository = require('../repositories/usuario.repository');
+//chamar a biblioteca .env para ler o valor SALT
+require('dotenv').config();
+//chamamos a biblioteca bcrypt para manipular o passwd - assincrona tem que esperar
+const bcrypt = require('bcrypt');
+
 
 //servico de criar usuarios
 const criar = async function(usuario) {
+    //adicionar a criptografia da senha
+    //transformar o salt em inteiro ~~ (dois tios)
+    usuario.senha = await bcrypt.hash(usuario.senha, ~~process.env.SALT)
     const usuarioCriado = await usuarioRepository.criar(usuario);
     return usuarioCriado;
 }
