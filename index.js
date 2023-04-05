@@ -4,6 +4,10 @@ require('dotenv').config();
 const express = require('express');
 // requisita o body-parser
 const bodyParser = require('body-parser');
+
+//requisita os middlewares
+const handle404Error = require('./src/middlewares/handle404Error');
+
 // instancia o express
 const app = express();
 // configura a porta no arquivo .env com o uso da biblioteca dotenv
@@ -18,9 +22,11 @@ app.use(bodyParser.urlencoded({extended: true}));
 // seta o padrao para json
 app.use(bodyParser.json());
 
-// define as chamadas de rotas 
-app.use('/api/itens/', itemRoute);
+// define as chamadas de rotas - executadas por ordem de descendencia como se fosse um case
 app.use('/api/usuarios', usuarioRoute);
+app.use('/api/itens/', itemRoute);
+app.use(handle404Error);
+
 
 // liga o servidor
 app.listen(process.env.PORTA, () => {
