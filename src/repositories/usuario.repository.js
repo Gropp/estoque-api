@@ -24,9 +24,18 @@ const encontrarPorId = async function(id) {
 }
 
 
+//encontrar um usuario por qualquer parametro/filtro
+const encontrarPorWhere = async function(where) {
+    const usuario = await Usuario.findOne({
+        where: where
+    });
+    return usuario;
+}
+
 //exportando as funcoes
 module.exports = {
     criar: criar,
     encontrarTodos: encontrarTodos,
-    encontrarPorId: encontrarPorId
+    encontrarPorId: encontrarPorId,
+    encontrarPorWhere: encontrarPorWhere
 }

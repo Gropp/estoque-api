@@ -18,20 +18,41 @@ const criar = async function(req, res, next) {
             throw response
         }
         res.send(response);
+        
     } catch (error) {
         //erro de semantica - manda o erro para o next - middleware que CAPTURE os erros
         return next(error)
     }
 }
 
-const encontrarTodos = async function(req, res) {
-    const usuarios = await usuarioService.encontrarTodos();
-    res.send(usuarios);
-}
+const encontrarTodos = async function(req, res, next) {
+    try {
+        //esta funcao faz um select geral na tabela, nao tem argumentos, entao nao tem response, se der um erro de tabela vazia o proprio trycatch gerencia esse erro.
+        const response = await usuarioService.encontrarTodos();
+        res.send(response);
 
-const encontrarPorId = async function(req, res) {
-    const usuario = await usuarioRepository.encontrarPorId(req.params.id);
-    res.send(usuario);
+    } catch (error) {
+        return next(error)
+    }
+}    
+
+const encontrarPorId = async function(req, res, next) {
+    try {
+        const response = await usuarioService.encontrarPorId(req.params.id);
+        //testa se response veio com alguma mensagem de erro
+        //se vier ele encaminha a response para o catch
+        if (response && response.message) {
+            //encaminha a response
+            //o throw finaliza o try
+            throw response;
+        }
+        res.send(response);
+    
+    } catch (error) {
+        //erro de semantica - manda o erro para o next - middleware que CAPTURE os erros
+        return next(error)
+    }
+    
 }
 
 module.exports = {
