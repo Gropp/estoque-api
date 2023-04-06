@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 
 //requisita os middlewares
 const handle404Error = require('./src/middlewares/handle404Error');
+const handleError = require('./src/middlewares/handleError');
 
 // instancia o express
 const app = express();
@@ -17,6 +18,7 @@ const app = express();
 const usuarioRoute = require('./src/routes/usuario.route');
 const itemRoute = require('./src/routes/item.route');
 
+
 // instancia o bofy-parser
 app.use(bodyParser.urlencoded({extended: true}));
 // seta o padrao para json
@@ -25,7 +27,12 @@ app.use(bodyParser.json());
 // define as chamadas de rotas - executadas por ordem de descendencia como se fosse um case
 app.use('/api/usuarios', usuarioRoute);
 app.use('/api/itens/', itemRoute);
+//o handle404Error, nao tem error no argumento da funcao req, res, por isso ele nao captura erros, essa funçao é acionada somente se a rota digitada no browser nao corresponder a nenhuma rota listada acima
 app.use(handle404Error);
+
+//o tratamento de erro tem que ficar no final das rotas, pois ele tem que receber e tratar todos os erros de todas as rotas!
+
+app.use(handleError)
 
 
 // liga o servidor
