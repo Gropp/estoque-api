@@ -1,3 +1,5 @@
+//Mensagens de erro
+
 const validatorMessage = function(atributo) {
     return `A propriedade ${atributo} é inválida(o)`;
 }
