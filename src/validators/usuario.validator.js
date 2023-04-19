@@ -6,7 +6,7 @@ const { validatorMessage } = require('../utils/errorMessage');
 const criar = function() {
     return [
         //testa se o nome exist, se ele é string)
-        //o bail nao encadeia mensagem de erro, se o anterior der erro ele nao texta o proximo
+        //o bail nao encadeia mensagem de erro, se o anterior der erro ele nao testa o proximo
         body('nome', validatorMessage('Nome')).exists().bail().isString(),
         body('email', validatorMessage('Email')).exists().bail().isString(),
         body('senha', validatorMessage('Senha')).exists().bail().isString()
