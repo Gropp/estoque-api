@@ -1,13 +1,20 @@
 //requisicao dos servicos
+const { validationResult } = require('express-validator');
 const usuarioRepository = require('../repositories/usuario.repository');
 const usuarioService = require('../services/usuario.service');
-
+const createError = require('http-errors');
 //RECEBE TODAS AS REQUISICOES E FAZ OS TRATAMENTOS
 //METODOS PARA SEREM USADOS NAS ROTAS
 //TEM QUE TER O NEXT PARA ENCONTRAR O PROXIMO MIDDLEWARE
 const criar = async function(req, res, next) {
     //TRATANDO ERROS
     try {
+        //adicionando o validator dentro do controller, vai receber a req e testar se tem erros
+        //se tiver erros, nao for vazio, ele vai mandar o status 422 e um array com todos os erros encontrados
+        const errors = validationResult(req);
+        if(!errors.isEmpty()) {
+            throw createError(422, { errors: errors.array()})
+        }
         //teste de erro de semantica - dar console.log em uma variavel que nao exite
         //console.log(varnaoexite);
         const response = await usuarioService.criar(req.body);

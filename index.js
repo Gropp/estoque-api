@@ -31,7 +31,6 @@ app.use('/api/itens/', itemRoute);
 app.use(handle404Error);
 
 //o tratamento de erro tem que ficar no final das rotas, pois ele tem que receber e tratar todos os erros de todas as rotas!
-
 app.use(handleError)
 
 
