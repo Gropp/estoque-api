@@ -15,7 +15,7 @@ router.post('/', usuarioValidator.criar(), usuarioController.criar)
 //rota de consulta GET
 router.get('/', usuarioController.encontrarTodos)
 //rota de consulta por id
-router.get('/:id',usuarioController.encontrarPorId)
+router.get('/:id', usuarioValidator.encontrarPorId() ,usuarioController.encontrarPorId)
 
 //exportamos a rota
 module.exports = router;

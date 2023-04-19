@@ -45,6 +45,12 @@ const encontrarTodos = async function(req, res, next) {
 
 const encontrarPorId = async function(req, res, next) {
     try {
+        //adicionando o validator dentro do controller, vai receber a req e testar se tem erros
+        //se tiver erros, nao for vazio, ele vai mandar o status 422 e um array com todos os erros encontrados
+        const errors = validationResult(req);
+        if(!errors.isEmpty()) {
+            throw createError(422, { errors: errors.array()})
+        }
         const response = await usuarioService.encontrarPorId(req.params.id);
         //testa se response veio com alguma mensagem de erro
         //se vier ele encaminha a response para o catch

@@ -1,5 +1,5 @@
 //importamos o body do express-validator para acessar os metodos da biblioteca
-const { body } = require('express-validator');
+const { body, param } = require('express-validator');
 const { validatorMessage } = require('../utils/errorMessage');
 
 //quando for o metodo criar da api ele vai fazer essa validacao retornando um array de erros
@@ -13,6 +13,14 @@ const criar = function() {
     ]
 }
 
+//testa a rota que tem o id como parametro - params
+const encontrarPorId = function() {
+    return [
+        param('id', validatorMessage('Id')).exists().bail().isInt(),
+    ]
+}
+
 module.exports = {
     criar,
+    encontrarPorId,
 }
