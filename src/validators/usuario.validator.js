@@ -13,6 +13,14 @@ const criar = function() {
     ]
 }
 
+//quando for atualizar o nome de um usuario
+const atualizar = function(){
+    return[
+        body('nome', validatorMessage('Nome')).exists().bail().isString(),
+        param('id', validatorMessage('Id')).exists().bail().isInt()
+    ]
+}
+
 //testa a rota que tem o id como parametro - params
 const encontrarPorId = function() {
     return [
@@ -22,5 +30,6 @@ const encontrarPorId = function() {
 
 module.exports = {
     criar,
-    encontrarPorId,
+    atualizar,
+    encontrarPorId
 }

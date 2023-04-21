@@ -24,6 +24,20 @@ const criar = async function(usuario) {
     return usuarioCriado;
 }
 
+//atualizar
+const atualizar = async function(usuario, id) {
+    const existeUsuario = await usuarioRepository.encontrarPorId(id);
+    //testa se o usuario existe
+    if (!existeUsuario) {
+        return createError(404, 'Usuário não existe!');
+    }
+    //se existir chama o update passando os paramentros
+    await usuarioRepository.atualizar(usuario, id);
+    //o update do sequelize nao retorna nada
+    //entao retornamos uma nova busca no usuario alterado
+    return await usuarioRepository.encontrarPorId(id);
+}
+
 //servico para listar todos os usuarios
 const encontrarTodos = async function() {
     const usuarios = await usuarioRepository.encontrarTodos();
@@ -43,6 +57,7 @@ const encontrarPorId = async function(id) {
 
 module.exports = {
     criar:criar,
+    atualizar: atualizar,
     encontrarTodos: encontrarTodos,
     encontrarPorId: encontrarPorId
 }

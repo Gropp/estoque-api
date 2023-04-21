@@ -32,6 +32,30 @@ const criar = async function(req, res, next) {
     }
 }
 
+const atualizar = async function(req, res, next) {
+    try {
+        const errors = validationResult(req);
+        if(!errors.isEmpty()) {
+            throw createError(422, { errors: errors.array()})
+        }
+
+        const response = await usuarioService.atualizar({
+            nome: req.body.nome
+        }, req.params.id);
+        //testa se response veio com alguma mensagem de erro
+        //se vier ele encaminha a response para o catch
+        if (response && response.message) {
+            //encaminha a response
+            throw response
+        }
+
+        res.send(response);
+
+    } catch (error) {
+        return next(error)
+    }
+}
+
 const encontrarTodos = async function(req, res, next) {
     try {
         //esta funcao faz um select geral na tabela, nao tem argumentos, entao nao tem response, se der um erro de tabela vazia o proprio trycatch gerencia esse erro.
@@ -70,6 +94,7 @@ const encontrarPorId = async function(req, res, next) {
 
 module.exports = {
     criar: criar,
+    atualizar: atualizar,
     encontrarTodos: encontrarTodos,
     encontrarPorId: encontrarPorId
 }

@@ -11,6 +11,14 @@ const criar = async function(usuario) {
     return usuarioCriado;
 }
 
+//verbo PUT
+//vamos atualizar um usuario de um id existente com as informações na variavel usuario
+const atualizar = async function(usuario, id) {
+    await Usuario.update(usuario, {
+        where: {id: id}
+    });
+}
+
 //funcao de select * sem parametros
 const encontrarTodos = async function() {
     const usuarios = await Usuario.findAll();
@@ -35,6 +43,7 @@ const encontrarPorWhere = async function(where) {
 //exportando as funcoes
 module.exports = {
     criar: criar,
+    atualizar: atualizar,
     encontrarTodos: encontrarTodos,
     encontrarPorId: encontrarPorId,
     encontrarPorWhere: encontrarPorWhere

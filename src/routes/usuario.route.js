@@ -12,6 +12,8 @@ const usuarioValidator = require('../validators/usuario.validator');
 //router.post('/', usuarioController.criar)
 //adicionando um middleware dentro da rota antes da funcao criar
 router.post('/', usuarioValidator.criar(), usuarioController.criar)
+//rota put para atualizar um registro
+router.put('/:id', usuarioValidator.atualizar(), usuarioController.atualizar)
 //rota de consulta GET
 router.get('/', usuarioController.encontrarTodos)
 //rota de consulta por id
